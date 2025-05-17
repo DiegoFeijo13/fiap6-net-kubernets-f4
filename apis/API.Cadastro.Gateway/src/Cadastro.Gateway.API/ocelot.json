@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://gatewayapi:8080",
+    "BaseUrl": "http://apigateway-service:80",
     "AuthenticationOptions": {
       "AuthenticationProviderKey": "Bearer"
     }
@@ -17,7 +17,9 @@
         }
       ],
       "UpstreamPathTemplate": "/Contatos",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamQueryStringsTransform": {
         "ddd": "{ddd}",
         "id": "{id}"
@@ -29,12 +31,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "auth",
+          "Host": "auth-service",
           "Port": 8082
         }
       ],
       "UpstreamPathTemplate": "/Token",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [
+        "Get"
+      ]
     },
     // API.AUTH.USUARIO
     {
@@ -42,12 +46,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "auth",
+          "Host": "auth-service",
           "Port": 8082
         }
       ],
       "UpstreamPathTemplate": "/Usuario",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [
+        "Post"
+      ]
     },
     // API.AUTH.USUARIO *PROTEGIDO*
     {
@@ -55,12 +61,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "auth",
+          "Host": "auth-service",
           "Port": 8082
         }
       ],
       "UpstreamPathTemplate": "/Usuario",
-      "UpstreamHttpMethod": [ "Delete" ],
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -72,12 +80,13 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "adicionarcontatos",
-          "Port": 8086
+          "Host": "apiadicionarcontato-service",
         }
       ],
       "UpstreamPathTemplate": "/AdicionarContato",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -89,12 +98,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "atualizarcontatos",
+          "Host": "apiatualizarcontato-service",
           "Port": 8088
         }
       ],
       "UpstreamPathTemplate": "/AtualizarContato",
-      "UpstreamHttpMethod": [ "Patch" ],
+      "UpstreamHttpMethod": [
+        "Patch"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -106,12 +117,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "removercontatos",
+          "Host": "apiremovercontato-service",
           "Port": 8090
         }
       ],
       "UpstreamPathTemplate": "/RemoverContato/{id}",
-      "UpstreamHttpMethod": [ "Delete" ],
+      "UpstreamHttpMethod": [
+        "Delete"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []

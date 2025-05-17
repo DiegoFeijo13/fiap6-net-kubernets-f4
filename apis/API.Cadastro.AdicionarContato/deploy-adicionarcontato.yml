@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adicionarcontatos-deployment
+  labels:
+    app: adicionarcontatos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adicionarcontatos
+  template:
+    metadata:
+      labels:
+        app: adicionarcontatos
+    spec:
+      containers:
+        - name: adicionarcontatos-cont
+          image: b1tech/adicionarcontatos:latest
+          ports:
+            - containerPort: 8086
+            - containerPort: 8087

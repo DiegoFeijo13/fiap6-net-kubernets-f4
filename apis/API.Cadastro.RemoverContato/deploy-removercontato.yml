@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: removercontatos-deployment
+  labels:
+    app: removercontatos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: removercontatos
+  template:
+    metadata:
+      labels:
+        app: removercontatos
+    spec:
+      containers:
+        - name: removercontatos-cont
+          image: b1tech/removercontatos:latest
+          ports:
+            - containerPort: 8090
+            - containerPort: 8091
