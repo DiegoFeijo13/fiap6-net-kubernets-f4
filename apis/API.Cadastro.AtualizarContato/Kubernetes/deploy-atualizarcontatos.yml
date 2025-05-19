@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atualizarcontatos
+  namespace: monitoring
+  labels:
+    app: atualizarcontatos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atualizarcontatos
+  template:
+    metadata:
+      labels:
+        app: atualizarcontatos
+    spec:
+      containers:
+        - name: atualizarcontatos
+          image: b1tech/atualizarcontatos:latest
+          ports:
+            - containerPort: 8088
+            - containerPort: 8089
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

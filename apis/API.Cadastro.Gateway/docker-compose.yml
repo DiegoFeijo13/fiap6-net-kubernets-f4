@@ -8,7 +8,13 @@ services:
       - "5001:8081"
     networks:
       - monitoring
-
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - monitoring
   prometheus:
     image: prom/prometheus:latest
     volumes:

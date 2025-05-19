@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumeradicionarcontatos
+  namespace: monitoring
+  labels:
+    app: consumeradicionarcontatos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumeradicionarcontatos
+  template:
+    metadata:
+      labels:
+        app: consumeradicionarcontatos
+    spec:
+      containers:
+        - name: consumeradicionarcontatos
+          image: b1tech/consumeradicionarcontatos:latest
+          ports:
+            - containerPort: 8092
+            - containerPort: 8093
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

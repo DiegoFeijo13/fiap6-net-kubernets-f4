@@ -1,7 +1,6 @@
 ﻿using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Http;
 
-
 public class RateLimitingMiddleware
 {
     private readonly RequestDelegate _next;
@@ -12,14 +11,16 @@ public class RateLimitingMiddleware
         _next = next;
 
         // Configura um Rate Limit de 5 requisições a cada 10 segundos
-        _limiter = new TokenBucketRateLimiter(new TokenBucketRateLimiterOptions
-        {
-            TokenLimit = 5, // Máximo de requisições permitidas
-            TokensPerPeriod = 5, // Requisições liberadas a cada período
-            ReplenishmentPeriod = TimeSpan.FromSeconds(30), // Tempo para renovar os tokens
-            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-            QueueLimit = 0 // Sem fila de espera
-        });
+        _limiter = new TokenBucketRateLimiter(
+            new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = 10, // Máximo de requisições permitidas
+                TokensPerPeriod = 5, // Requisições liberadas a cada período
+                ReplenishmentPeriod = TimeSpan.FromSeconds(30), // Tempo para renovar os tokens
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0 // Sem fila de espera
+            }
+        );
     }
 
     public async Task InvokeAsync(HttpContext context)

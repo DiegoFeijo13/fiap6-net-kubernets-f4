@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: removercontatos-deployment
+  name: removercontatos
+  namespace: monitoring
   labels:
     app: removercontatos
 spec:
@@ -15,8 +16,12 @@ spec:
         app: removercontatos
     spec:
       containers:
-        - name: removercontatos-cont
+        - name: removercontatos
           image: b1tech/removercontatos:latest
           ports:
             - containerPort: 8090
             - containerPort: 8091
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

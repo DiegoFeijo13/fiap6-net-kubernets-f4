@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumerremovercontatos
+  namespace: monitoring
+  labels:
+    app: consumerremovercontatos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumerremovercontatos
+  template:
+    metadata:
+      labels:
+        app: consumerremovercontatos
+    spec:
+      containers:
+        - name: consumerremovercontatos
+          image: b1tech/consumerremovercontatos:latest
+          ports:
+            - containerPort: 8096
+            - containerPort: 8097
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apigateway-deployment
+  name: gatewayapi
   labels:
-    app: apigateway
+    app: gatewayapi
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: apigateway
+      app: gatewayapi
   template:
     metadata:
       labels:
-        app: apigateway
+        app: gatewayapi
     spec:
       containers:
-        - name: apigateway-cont
-          image: b1tech/apigateway:latest
+        - name: gatewayapi
+          image: b1tech/gatewayapi:latest
           ports:
             - containerPort: 8080
             - containerPort: 8081
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

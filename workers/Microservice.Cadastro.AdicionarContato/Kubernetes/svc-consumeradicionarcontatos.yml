@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumeradicionarcontatos
+  namespace: monitoring
+spec:
+  type: NodePort
+  selector:
+    app: consumeradicionarcontatos
+  ports:
+    - name: main
+      port: 8092
+      targetPort: 8092
+      nodePort: 30992
+    - name: metrics
+      port: 8093
+      targetPort: 8093
+      nodePort: 30993

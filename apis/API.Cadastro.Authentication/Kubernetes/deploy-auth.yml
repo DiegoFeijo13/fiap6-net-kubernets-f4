@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-deployment
+  name: auth
+  namespace: monitoring
   labels:
     app: auth
 spec:
@@ -15,8 +16,12 @@ spec:
         app: auth
     spec:
       containers:
-        - name: auth-cont
-          image: b1tech/apiauth:latest
+        - name: auth
+          image: b1tech/cadastroauthentication:latest
           ports:
             - containerPort: 8082
             - containerPort: 8083
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
