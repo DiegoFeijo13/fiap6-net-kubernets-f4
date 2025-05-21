@@ -18,3 +18,15 @@ spec:
           ports:
             - containerPort: 5672
             - containerPort: 15672
+          volumeMounts:
+            - name: rabbitmq-storage
+              mountPath: /var/lib/rabbitmq
+          env:
+            - name: RABBITMQ_MNESIA_BASE
+              value: /var/lib/rabbitmq/mnesia
+            - name: RABBITMQ_LOG_BASE
+              value: /var/lib/rabbitmq/logs
+      volumes:
+        - name: rabbitmq-storage
+          persistentVolumeClaim:
+            claimName: rabbitmq-volume

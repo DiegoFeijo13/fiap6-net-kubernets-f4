@@ -1,6 +1,6 @@
 # API de Gerenciamento de Contatos
 
-Este repositório contem um conjunto de aplicações que propõem solucionar o Tech Challenge da Fase 3 do curso de pós graduação 6NETT na FIAP.
+Este repositório contem um conjunto de aplicações que propõem solucionar o Tech Challenge da Fase 4 do curso de pós graduação 6NETT na FIAP.
 
 Na imagem abaixo é ilustrada a arquitetura utilizada para orquestrar as aplicações:
 ![Diagrama Arquitetura](diagrama.png)
@@ -28,24 +28,51 @@ Na imagem abaixo é ilustrada a arquitetura utilizada para orquestrar as aplica�
 
 ## Configuração do Projeto
 
+Este projeto pode ser executado via Docker Compose ou em um cluster Kubernetes.
+
 **1. Clone o repositório:**
 
    ```bash
-   git clone https://github.com/Grupo-1-6NETT/fiap6-net-microsservicos-f3.git   
+   git clone https://github.com/Grupo-1-6NETT/fiap6-net-kubernets-f4 
    ```
 
 
 **2. Inicie todos os serviços (API, Prometheus, Grafana, Node Exporter):**
 
-```bash
-docker-compose up --build
-```
+  ```bash
+  docker-compose up --build
+  ```
 
 Após iniciar, o gateway estará disponível em:
 
 - API: http://localhost:5000 (porta padrão)
 - Prometheus: http://localhost:9090
 - Grafana: http://localhost:3000
+
+**3. Execução em Kubernetes:**
+Requisitos:
+- kubectl
+- Um cluster Kubernetes ativo (minikube, Kind, AKS, etc.)
+
+Passos:
+1. Aplique os manifests Kubernetes contidos no repositório:
+```bash
+kubectl apply -f k8s/
+```
+2. Verifique os recursos com:
+```bash
+kubectl get all -n monitoring
+```
+Principais Serviços:
+- API Gateway (LoadBalancer): http://127.0.0.1:80
+- Grafana: http://localhost:30300
+- Prometheus: http://localhost:30090
+- RabbitMQ Management: http://localhost:32624
+
+Utilize o port-forward se necessário, por exemplo:
+```bash
+kubectl port-forward svc/grafana 3000:3000 -n monitoring
+```
 
 ---
 ## Endpoints da API
@@ -141,7 +168,9 @@ Os testes de unidade foram implementados utilizando o Moq e FluentAssertions par
 - **MassTransit** - Transporte de mensagens
 - **Azure SQL Database** - Banco de dados
 - **Moq e FluentAssertions** - Testes unitários
-- **Prometheus e Grafana** - Monitoramento e visualização de métricas.
-- **Node Exporter** - Coleta de métricas de hardware e sistema.
-- **Azure Function** - Para obtenção dos dados de contato.
+- **Prometheus e Grafana** - Monitoramento e visualização de métricas
+- **Node Exporter** - Coleta de métricas de hardware e sistema
+- **Azure Function** - Para obtenção dos dados de contato
 - **Ocelot** - API Gateway
+- **Docker** - Criação de conteiners
+- **Kubernetes** - Orquestração dos containers
